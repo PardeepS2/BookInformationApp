@@ -9,14 +9,15 @@ namespace BookInformationApp
     class Book
     {
         private string name;
-       // private  Author[];
+        private  Author[] authors;
         private double price;
-        private DateTime publication;
+        private Date publication;
         private int qty = 0;
 
-        public Book(string name, double price)
+        public Book(string name,Author[] authors, double price)
         {
             this.name = name;
+            this.authors = authors;
             this.price = price;
         }
 
@@ -34,15 +35,15 @@ namespace BookInformationApp
         
         //get Author
 
-        public DateTime GetPublicationDate()
+        public Date GetPublicationDate()
         {
             return this.publication;
         }
 
-        /*public void SetPublicationDate(DateTime date)
+        public void SetPublicationDate(Date date)
         {
-            this.
-        }*/
+           
+        }
 
         public double GetPrice()
         {
