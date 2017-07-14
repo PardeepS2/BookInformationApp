@@ -27,6 +27,51 @@ namespace BookInformationApp
             this.qty = qty;
         }
 
+        public string GetName()
+        {
+            return this.name;
+        }
+        
+        //get Author
 
+        public DateTime GetPublicationDate()
+        {
+            return this.publication;
+        }
+
+        /*public void SetPublicationDate(DateTime date)
+        {
+            this.
+        }*/
+
+        public double GetPrice()
+        {
+            return this.price;
+        }
+
+        public void SetPrice(double price)
+        {
+            this.price = price;
+        }
+
+        public int GetQty()
+        {
+           return  this.qty;
+        }
+
+        public void SetQty(int qty)
+        {
+            this.qty = qty;
+        }
+
+        public string toString()
+        {
+            return String.Format("");
+        }
+
+       /* public string GetAuthorNames()
+        {
+
+        }*/
     }
 }
