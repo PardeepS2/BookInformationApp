@@ -33,7 +33,11 @@ namespace BookInformationApp
             return this.name;
         }
         
-        //get Author
+        public Author[] GetAuthors()
+        {
+            return this.authors;
+            
+        }
 
         public Date GetPublicationDate()
         {
