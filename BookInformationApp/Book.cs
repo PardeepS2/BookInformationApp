@@ -8,11 +8,16 @@ namespace BookInformationApp
 {
     class Book
     {
-        private string name;
+         string name;
         private  Author[] authors;
         private double price;
         private Date publication;
         private int qty = 0;
+
+        public Book()
+        {
+
+        }
 
         public Book(string name,Author[] authors, double price)
         {
@@ -46,8 +51,9 @@ namespace BookInformationApp
 
         public void SetPublicationDate(Date date)
         {
-           
+            this.publication = date;
         }
+        
 
         public double GetPrice()
         {
@@ -74,9 +80,14 @@ namespace BookInformationApp
             return String.Format("");
         }
 
-       /* public string GetAuthorNames()
+        public string GetAuthorName()
         {
-
-        }*/
+            string name = "";
+            for (int i = 0; i < this.authors.Length; i++)
+            {
+                name = name + ", " + this.authors[i];
+            }
+            return name;
+        }
     }
 }

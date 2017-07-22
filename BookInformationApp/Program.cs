@@ -10,6 +10,15 @@ namespace BookInformationApp
     {
         static void Main(string[] args)
         {
+
+            Data.FillData();
+           // Book book = new Book();
+           // sample fill = new sample();
+           // fill.fillData();
+
+            Console.ReadKey();
+
+
         }
     }
 }
