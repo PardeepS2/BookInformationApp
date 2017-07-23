@@ -43,11 +43,6 @@ namespace BookInformationApp
             return this.DOB;
         }
 
-        public void SetDOB(Date date)
-        {
-            
-        }
-
         public string GetEmail()
         {
             return this.email;

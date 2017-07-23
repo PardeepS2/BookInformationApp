@@ -26,6 +26,15 @@ namespace BookInformationApp
             this.price = price;
         }
 
+        public Book(string name, Author[] authors, double price, Date publication, int qty)
+        {
+            this.name = name;
+            this.authors = authors;
+            this.price = price;
+            this.publication = publication;
+            this.qty = qty;
+        }
+
         public Book(string name, double price, int qty)
         {
             this.name = name;
@@ -46,7 +55,9 @@ namespace BookInformationApp
 
         public Date GetPublicationDate()
         {
-            return this.publication;
+            Date date;
+            date = this.publication;
+            return date;
         }
 
         public void SetPublicationDate(Date date)
@@ -77,6 +88,7 @@ namespace BookInformationApp
 
         public string toString()
         {
+            string bookinfo;
             return String.Format("");
         }
 

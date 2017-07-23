@@ -51,9 +51,7 @@ namespace BookInformationApp
 
         public void SetDate(int day, int month, int year )
         {
-            this.day = day;
-            this.month = month;
-            this.year = year;
+            Date date = new Date(day, month, year);
         }
         public string toString()
         {
