@@ -28,15 +28,16 @@ namespace BookInformationApp
         {
            
             Console.Clear();
-            Console.WriteLine("\tWelCome To The BookInfomation Application");
+            Console.WriteLine("\tWelCome To The Book Infomation Application");
             Console.WriteLine("\t=========================================");
             Console.WriteLine();
             Console.WriteLine("\t1. List of Available Books");
             Console.WriteLine("\t2. List of Authors");
-            Console.WriteLine("\t3. Shopp Books");
+            Console.WriteLine("\t3. Shop Books");
             Console.WriteLine("\t4. Search Books by Book name");
+            Console.WriteLine("\t5. Checkout");
            // Console.WriteLine("\t5. Search Books by Name of the Author ");
-            Console.WriteLine("\t5. Exit program\n");
+            Console.WriteLine("\t6. Exit program\n");
             Console.WriteLine("\tPlease select from the options:");
             choice = Convert.ToInt32(Console.ReadLine());
 
@@ -61,12 +62,12 @@ namespace BookInformationApp
                 SearchBookName(user);
             }
 
-            //else if (choice == 5)
-            //{
-            //    SearchBookAuthor(user);
-            //}
+            else if (choice == 5)
+            {
+                CheckOut(user);
+            }
 
-            else if (choice== 5)
+            else if (choice== 6)
             {
                 Environment.Exit(0);
             }
@@ -88,7 +89,7 @@ namespace BookInformationApp
             user.AddAuthor(author5);
             user.AddAuthor(author6);
 
-            user.AddBook(new Book("musketers", new Author[] { author6, author5 }, 20.11, new Date(22, 11, 2002), 15));
+            user.AddBook(new Book("musketers", new Author[] { author6, author5 }, 0, new Date(22, 11, 2002), 15));
             user.AddBook(new Book("five p", new Author[] { author2, author3 }, 11.45, new Date(23, 10, 2012), 16));
             user.AddBook(new Book("soul  ", new Author[] { author4, author6 }, 34.22, new Date(05, 07, 2001), 14));
             user.AddBook(new Book("3 mist", new Author[] { author3, author1 }, 22.01, new Date(09, 09, 2002), 19));
@@ -124,10 +125,32 @@ namespace BookInformationApp
             for (int i = 0; i < Books.Length; i++)
             {
                 
-                Console.WriteLine(i + 1 + ". " + Books[i].GetName() + "\t\t$" + Books[i].GetPrice() +  "\t\t " + Books[i].GetQty());
+                
+                double price = Books[i].GetPrice();
+                if (price <= 0 )
+                {
+
+                    Console.WriteLine(i + 1 + ". " + Books[i].GetName() + "\t\t" + "free" + "\t\t " + Books[i].GetQty());
+
+
+                }
+                else
+                    Console.WriteLine(i + 1 + ". " + Books[i].GetName() + "\t\t$" + Books[i].GetPrice() + "\t\t " + Books[i].GetQty());
             }
-            Console.WriteLine("Press any key for main menu");
-            Console.ReadKey();
+            //Console.WriteLine("Press any key for main menu");
+            //Console.ReadKey();
+            Console.WriteLine("Press 1 to buy books:");
+            Console.WriteLine("Press 2 to Main Menu:");
+            choice = Convert.ToInt32(Console.ReadLine());
+            
+
+            if(choice == 1)
+            {
+                BuyBooks(user);               
+            }   else if (choice == 2)
+            {
+                Menu(user);
+            }        
         }
 
         static void AvailableAuthors(User user)
@@ -153,7 +176,7 @@ namespace BookInformationApp
             Book[] books = user.GetBook();
 
             int select = 0;
-            int qty = 0;
+            int qty;
             int nqty = 0;
 
             Console.WriteLine("\n\t\tList of available books");
@@ -164,15 +187,27 @@ namespace BookInformationApp
                 Book b = new Book();
                 b = books[i];
                 Console.Write("\t" + (i + 1) + ". " + b.GetName());
-                Console.Write("\t$" + b.GetPrice());
+                if(b.GetPrice() <= 0)
+                {
+                    
+                    Console.Write("\t" + "free");
+           }else
+                {
+                    Console.Write("\t$" + b.GetPrice());
+                }
+                
                 Console.WriteLine("\t\t" + b.GetQty() + " books available");
             }
 
             Console.WriteLine("\nSelect which book you want to buy");
             select = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("\nEnter No of books you want to buy");
-            qty = Convert.ToInt32(Console.ReadLine());
-
+            do {
+                Console.WriteLine("\nEnter No of books you want to buy");
+                qty = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("No of book should be more then zero");
+            }
+            while (qty<=0);
+                 
             for (int i = 0; i < books.Length; i++)
             {
                 if (i == select - 1)
@@ -181,6 +216,7 @@ namespace BookInformationApp
                     bc = books[i];
 
                     nqty = books[i].GetQty();
+                   
                     books[i].SetQty(nqty - qty);
 
                     bc.SetQty(qty);
@@ -339,6 +375,40 @@ namespace BookInformationApp
                 }
             }
             Console.ReadKey();
+        }
+
+        static void CheckOut(User user)
+        {
+            Book[] cart = user.GetShoppingCart();
+            double bill = 0;
+
+            Console.WriteLine("\n\t\tList of books in cart\n");
+
+            for (int i = 0; i < cart.Length; i++)
+            {
+                Book b1 = new Book();
+                b1 = cart[i];
+                Console.Write("\t" + (i + 1) + ". " + b1.GetName());
+                Console.Write("\t$" + b1.GetPrice());
+                Console.WriteLine("\t" + b1.GetQty() + " books");
+            }
+
+            for (int i = 0; i < cart.Length; i++)
+            {
+                Book b2 = new Book();
+                b2 = cart[i];
+                bill += b2.GetQty() * b2.GetPrice();
+            }
+
+            Console.WriteLine("Your bill is $" + bill);
+            Console.ReadKey();
+            for (int i = 0; i < cart.Length; i++)
+            {
+                Book b = new Book();
+                b = cart[i];
+                user.RemoveFromCart(cart[i]);
+            }
+            Console.Clear();
         }
 
         //static void SearchBookAuthor(User user)

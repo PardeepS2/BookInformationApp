@@ -88,8 +88,12 @@ namespace BookInformationApp
 
         public string toString()
         {
-            string bookinfo;
-            return String.Format("");
+            string bookinfo = "\nbookname:\t"  + this.GetName()  
+                                +  "\nAuthorName:\t" + this.GetAuthorName() 
+                               + "\nPrice:\t"   + this.GetPrice() 
+                               + "\nPublication Date:\t"  + this.GetPublicationDate() 
+                                  + "\nQuantity:\t" + this.GetQty();
+            return bookinfo;
         }
 
         public string GetAuthorName()
